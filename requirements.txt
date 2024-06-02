@@ -1,0 +1,13 @@
+wheel==0.38.4
+flask~=2.2.5
+pandas~=2.2.1
+flask-swagger-ui
+flask_sqlalchemy
+flask_marshmallow
+python-dateutil~=2.8.2
+requests~=2.31.0
+matplotlib
+statsmodels
+scikit_learn
+openpyxl==3.0.10
+holidays

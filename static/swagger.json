@@ -1,0 +1,367 @@
+{
+  "info": {
+    "description": "Electricity Price Forecasting & Backtesting",
+    "version": "1.0.0",
+    "title": "Research & Development Price Forecasting API"
+  },
+   "paths": {
+      "/runHourlyDayaheadForecast":{
+          "post" :{
+              "tags": [
+                  "Forecasting"
+              ],
+              "summary": "Run hourly dayahead price forecast",
+              "parameters": [{
+                "name": "hour",
+                "in": "query",
+                "description": "hour to run forecast on",
+                "required": true,
+                "type": "integer"
+              }, {
+                "name": "day",
+                "in": "query",
+                "description": "day to run forecast on",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "rolling_window_length",
+                "in": "query",
+                "description": "length of rolling window used for calibration",
+                "required": true,
+                "type": "integer"
+              },
+              {
+                "name": "country",
+                "in": "query",
+                "description": "which country data to use",
+                "required": true,
+                "type": "string",
+                "enum": ["DE-LU", "FR"]
+              },
+              {
+                "name": "outlier_detector",
+                "in": "query",
+                "description": "method used to detect outliers",
+                "required": true,
+                "type": "string",
+                "enum": ["running median"]
+              },
+              {
+                "name": "missing_values_filler",
+                "in": "query",
+                "description": "method used to fill missing values",
+                "required": true,
+                "type": "string",
+                "enum": ["smoothed similar day"]
+              },
+              {
+                "name": "seasonal_processor",
+                "in": "query",
+                "description": "method used to deal with seasonality",
+                "required": true,
+                "type": "string",
+                "enum": ["seasonal decompose"]
+              },
+              {
+                "name": "price_transformator",
+                "in": "query",
+                "description": "method used to transform prices",
+                "required": true,
+                "type": "string",
+                "enum": ["3sigma", "3sigmaLog", "logistic", "asinh", "boxcox", "poly", "mlog"]
+              },
+              {
+                "name": "model",
+                "in": "query",
+                "description": "model used to forecast prices",
+                "required": true,
+                "type": "string",
+                "enum": ["AR1", "AR1h", "AR1hm", "AR2", "AR2h", "AR2hm", "mAR1", "mAR1h", "mAR1hm"]
+              }
+              ],
+              "responses": {
+              "200": {
+                  "description": "OK"
+              },
+              "404": {
+                  "description": "NOT FOUND"
+              }
+            }
+          }
+      },
+      "/runHourlyDayaheadBacktest":{
+          "post" :{
+              "tags": [
+                  "Backtesting"
+              ],
+              "summary": "Run hourly dayahead price backtest",
+              "parameters": [{
+                "name": "hour",
+                "in": "query",
+                "description": "hour to run backtest on",
+                "required": true,
+                "type": "integer"
+              },
+                {
+              "name": "out_of_sample_period",
+                "in": "query",
+                "description": "out of sample test period",
+                "required": true,
+                "type": "integer"
+              },
+              {
+                "name": "last_day",
+                "in": "query",
+                "description": "last day to run backtest on",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "rolling_window_length",
+                "in": "query",
+                "description": "length of rolling window used for calibration",
+                "required": true,
+                "type": "integer"
+              },
+              {
+                "name": "country",
+                "in": "query",
+                "description": "which country data to use",
+                "required": true,
+                "type": "string",
+                "enum": ["DE-LU", "FR"]
+              },
+              {
+                "name": "outlier_detector",
+                "in": "query",
+                "description": "method used to detect outliers",
+                "required": true,
+                "type": "string",
+                "enum": ["running median"]
+              },
+              {
+                "name": "missing_values_filler",
+                "in": "query",
+                "description": "method used to fill missing values",
+                "required": true,
+                "type": "string",
+                "enum": ["smoothed similar day"]
+              },
+              {
+                "name": "seasonal_processor",
+                "in": "query",
+                "description": "method used to deal with seasonality",
+                "required": true,
+                "type": "string",
+                "enum": ["seasonal decompose"]
+              },
+              {
+                "name": "price_transformator",
+                "in": "query",
+                "description": "method used to transform prices",
+                "required": true,
+                "type": "string",
+                "enum": ["3sigma", "3sigmaLog", "logistic", "asinh", "boxcox", "poly", "mlog"]
+              },
+              {
+                "name": "model",
+                "in": "query",
+                "description": "model used to forecast prices",
+                "required": true,
+                "type": "string",
+                "enum": ["AR1", "AR1h", "AR1hm", "AR2", "AR2h", "AR2hm", "mAR1", "mAR1h", "mAR1hm"]
+              }
+              ],
+              "responses": {
+              "200": {
+                  "description": "OK"
+              },
+              "404": {
+                  "description": "NOT FOUND"
+              }
+            }
+          }
+      },
+      "/runDailyDayaheadForecast":{
+          "post" :{
+              "tags": [
+                  "Forecasting"
+              ],
+              "summary": "Run daily dayahead price forecast",
+              "parameters": [{
+                "name": "day",
+                "in": "query",
+                "description": "day to run forecast on",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "rolling_window_length",
+                "in": "query",
+                "description": "length of rolling window used for calibration",
+                "required": true,
+                "type": "integer"
+              },
+              {
+                "name": "hourly_separated",
+                "in": "query",
+                "description": "separate model for each hour or joint across hours",
+                "required": true,
+                "type": "boolean"
+              },
+              {
+                "name": "country",
+                "in": "query",
+                "description": "which country data to use",
+                "required": true,
+                "type": "string",
+                "enum": ["DE-LU", "FR"]
+              },
+              {
+                "name": "outlier_detector",
+                "in": "query",
+                "description": "method used to detect outliers",
+                "required": true,
+                "type": "string",
+                "enum": ["running median"]
+              },
+              {
+                "name": "missing_values_filler",
+                "in": "query",
+                "description": "method used to fill missing values",
+                "required": true,
+                "type": "string",
+                "enum": ["smoothed similar day"]
+              },
+              {
+                "name": "seasonal_processor",
+                "in": "query",
+                "description": "method used to deal with seasonality",
+                "required": true,
+                "type": "string",
+                "enum": ["seasonal decompose"]
+              },
+              {
+                "name": "price_transformator",
+                "in": "query",
+                "description": "method used to transform prices",
+                "required": true,
+                "type": "string",
+                "enum": ["3sigma", "3sigmaLog", "logistic", "asinh", "boxcox", "poly", "mlog"]
+              },
+              {
+                "name": "model",
+                "in": "query",
+                "description": "model used to forecast prices",
+                "required": true,
+                "type": "string",
+                "enum": ["AR1", "AR1h", "AR1hm", "AR2", "AR2h", "AR2hm", "mAR1", "mAR1h", "mAR1hm"]
+              }
+              ],
+              "responses": {
+              "200": {
+                  "description": "OK"
+              },
+              "404": {
+                  "description": "NOT FOUND"
+              }
+            }
+          }
+      },
+      "/runDailyDayaheadBacktest":{
+          "post" :{
+              "tags": [
+                  "Backtesting"
+              ],
+              "summary": "Run daily dayahead price backtest",
+              "parameters": [{
+                "name": "out_of_sample_period",
+                "in": "query",
+                "description": "out of sample test period",
+                "required": true,
+                "type": "integer"
+              },
+              {
+                "name": "last_day",
+                "in": "query",
+                "description": "last day to run backtest on",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "rolling_window_length",
+                "in": "query",
+                "description": "length of rolling window used for calibration",
+                "required": true,
+                "type": "integer"
+              },
+              {
+                "name": "hourly_separated",
+                "in": "query",
+                "description": "separate model for each hour or joint across hours",
+                "required": true,
+                "type": "boolean"
+              },
+              {
+                "name": "country",
+                "in": "query",
+                "description": "which country data to use",
+                "required": true,
+                "type": "string",
+                "enum": ["DE-LU", "FR"]
+              },
+              {
+                "name": "outlier_detector",
+                "in": "query",
+                "description": "method used to detect outliers",
+                "required": true,
+                "type": "string",
+                "enum": ["running median"]
+              },
+              {
+                "name": "missing_values_filler",
+                "in": "query",
+                "description": "method used to fill missing values",
+                "required": true,
+                "type": "string",
+                "enum": ["smoothed similar day"]
+              },
+              {
+                "name": "seasonal_processor",
+                "in": "query",
+                "description": "method used to deal with seasonality",
+                "required": true,
+                "type": "string",
+                "enum": ["seasonal decompose"]
+              },
+              {
+                "name": "price_transformator",
+                "in": "query",
+                "description": "method used to transform prices",
+                "required": true,
+                "type": "string",
+                "enum": ["3sigma", "3sigmaLog", "logistic", "asinh", "boxcox", "poly", "mlog"]
+              },
+              {
+                "name": "model",
+                "in": "query",
+                "description": "model used to forecast prices",
+                "required": true,
+                "type": "string",
+                "enum": ["AR1", "AR1h", "AR1hm", "AR2", "AR2h", "AR2hm", "mAR1", "mAR1h", "mAR1hm"]
+              }
+              ],
+              "responses": {
+              "200": {
+                  "description": "OK"
+              },
+              "404": {
+                  "description": "NOT FOUND"
+              }
+            }
+          }
+      }
+  },
+  "swagger": "2.0"
+}
