@@ -53,7 +53,7 @@ class LinearModelVariablesPreparator:
 
     def _define_hourly_mask(self):
         self._hourly_mask = self._transformed_dayahead_df[self._HOUR] == self._hour if self._hour else np.array(
-            [True]) * len(self._transformed_dayahead_df)
+            [True] * len(self._transformed_dayahead_df))
 
     def _mask_linear_regression_input_data(self):
         self._linear_regression_input_data = [d[self._hourly_mask] for d in self._linear_regression_input_data]
