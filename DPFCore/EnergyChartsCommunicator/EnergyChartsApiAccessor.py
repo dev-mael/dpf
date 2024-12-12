@@ -51,7 +51,7 @@ class EnergyChartsAPI:
 
         """
         url = self._join_string('/', self.base_url, data_type)
-        response = requests.get(url, params=parameters)
+        response = requests.get(url, params=parameters, timeout=60)
         if response.status_code == 200:
             return response.json()
         else:
