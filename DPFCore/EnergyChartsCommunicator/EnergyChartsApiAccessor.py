@@ -1,6 +1,6 @@
 from enum import Enum
-import requests
 from typing import Any
+from security import safe_requests
 
 
 class ValidationError(TypeError):
@@ -51,7 +51,7 @@ class EnergyChartsAPI:
 
         """
         url = self._join_string('/', self.base_url, data_type)
-        response = requests.get(url, params=parameters)
+        response = safe_requests.get(url, params=parameters)
         if response.status_code == 200:
             return response.json()
         else:
